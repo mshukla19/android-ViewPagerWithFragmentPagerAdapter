@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,12 +27,16 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
 
         // set number of cache page
         // I am setting it to 2 , so that all our fragments remain in cached state
-        viewPager.setOffscreenPageLimit(2);
+        viewPager.setOffscreenPageLimit(1);
 
         ArrayList<Fragment> fragments = new ArrayList<Fragment>();
         fragments.add(TestFragment.newInstance("Fragment A", "#770000"));
         fragments.add(TestFragment.newInstance("Fragment B", "#007700"));
         fragments.add(TestFragment.newInstance("Fragment C", "#000077"));
+        fragments.add(TestFragment.newInstance("Fragment D", "#000077"));
+        fragments.add(TestFragment.newInstance("Fragment E", "#000077"));
+        fragments.add(TestFragment.newInstance("Fragment F", "#000077"));
+
 
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), fragments));
 
@@ -51,7 +54,6 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
     @Override
     public void onPageSelected(int position) {
         // called when a new page been selected
-        Toast.makeText(this, "Page : " + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override

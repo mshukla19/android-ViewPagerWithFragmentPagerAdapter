@@ -1,13 +1,17 @@
 package nonsensecoder.com.viewpagerwithfragmentpageradapter.ui.fragment;
 
-import android.graphics.Color;
+import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import nonsensecoder.com.viewpagerwithfragmentpageradapter.R;
 
@@ -68,9 +72,23 @@ public class TestFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_test, container, false);
-        TextView tv = (TextView) v.findViewById(R.id.tvFragment);
-        tv.setText(name);
-        v.setBackgroundColor(Color.parseColor(color));
+        Button save = (Button) v.findViewById(R.id.button);
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        final CropImageView cropImageView = (CropImageView) v.findViewById(R.id.imageview);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString(name,cropImageView.getCropRect().flattenToString());
+                editor.commit();
+            }
+        });
+        String rectString =preferences.getString(name,"absent");
+        if(!rectString.equals("absent")) {
+            Rect rect1 = Rect.unflattenFromString(rectString);
+            cropImageView.setCropRect(rect1);
+        }
+        cropImageView.setImageResource(R.drawable.xyz);
         return v;
     }
 

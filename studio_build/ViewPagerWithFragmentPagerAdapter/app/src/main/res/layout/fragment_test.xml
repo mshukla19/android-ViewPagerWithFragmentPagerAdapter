@@ -1,15 +1,24 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvFragment"
+    <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/blank_fragment"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#aeaeae"
+        android:text="Save box"
         android:textStyle="bold" />
 
-</RelativeLayout>
+    <com.theartofdev.edmodo.cropper.CropImageView
+        android:id="@+id/imageview"
+        android:layout_width="match_parent"
+        android:adjustViewBounds = "true"
+        android:visibility="visible"
+        android:layout_marginTop="100dp"
+        android:layout_height="200dp"
+        >
+
+    </com.theartofdev.edmodo.cropper.CropImageView>
+
+</LinearLayout>
